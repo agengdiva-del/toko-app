@@ -1,0 +1,6 @@
+{
+  "name": "MitraArja Merchant",
+  "description": "Enterprise Merchant Management Platform for Local Delivery Ecosystem with Multi-Store, Orders, Inventory, Promotions, and Wallet.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
