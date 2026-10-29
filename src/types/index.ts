@@ -274,3 +274,49 @@ export interface SalesReport {
   ordersCount: number;
   averageOrderValue: number;
 }
+
+export type RegistrationVerificationStatus = 'Menunggu Verifikasi' | 'Disetujui' | 'Ditolak';
+
+export interface MerchantRegistrationData {
+  id: string;
+  // 1. Data Pemilik & Akun
+  ownerName: string; // Wajib
+  ownerPhone: string; // Wajib
+  isPhoneOtpVerified: boolean; // Wajib · OTP
+  email?: string; // Opsional
+  password: string; // Wajib
+  passwordConfirmation: string; // Wajib
+  ownerPhotoUrl?: string; // Opsional
+
+  // 2. Data Warung / Toko
+  storeName: string; // Wajib
+  storeCategory: string; // Wajib
+  storeWhatsapp?: string; // Opsional
+  storeLogoUrl: string; // Wajib
+  storeDescription?: string; // Opsional
+  productTypes: string[]; // Wajib
+
+  // 3. Alamat & Titik Lokasi
+  fullAddress: string; // Wajib
+  village: string; // Wajib (Desa / Kelurahan)
+  district: string; // Wajib (Kecamatan)
+  gpsLocation: {
+    lat: number;
+    lng: number;
+    label?: string;
+  }; // Wajib
+
+  // 4. Operasional & Verifikasi Identitas
+  openingHours: string; // Wajib
+  closingHours: string; // Wajib
+  operationalDays: string[]; // Wajib
+  ktpPhotoUrl?: string; // Sesuai kebijakan verifikasi
+  agreedToTerms: boolean; // Wajib
+
+  // Status & Metadata
+  status: RegistrationVerificationStatus;
+  submittedAt: string;
+  reviewedAt?: string;
+  rejectionReason?: string;
+}
+

@@ -21,6 +21,8 @@ import {
   OrderStatus,
   WithdrawalMethod,
   MerchantStatus,
+  MerchantRegistrationData,
+  RegistrationVerificationStatus,
 } from '../types/index.ts';
 import {
   INITIAL_MERCHANT,
@@ -123,6 +125,11 @@ interface MerchantContextType {
   isOffline: boolean;
   setIsOffline: (val: boolean) => void;
 
+  // Registration & Account Lifecycle
+  registrationData: MerchantRegistrationData;
+  updateRegistrationStatus: (status: RegistrationVerificationStatus, reason?: string) => void;
+  submitMerchantRegistration: (data: Omit<MerchantRegistrationData, 'id' | 'status' | 'submittedAt'>) => void;
+
   // Toast
   toasts: ToastMessage[];
   addToast: (type: 'success' | 'error' | 'info', title: string, message: string) => void;
@@ -134,7 +141,7 @@ const MerchantContext = createContext<MerchantContextType | undefined>(undefined
 export const MerchantProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Navigation & UI state
   const [activeTab, setActiveTab] = useState<string>('dashboard');
-  const [deviceView, setDeviceView] = useState<'mobile' | 'desktop'>('mobile');
+  const [deviceView, setDeviceView] = useState<'mobile' | 'desktop'>('desktop');
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const [isOffline, setIsOffline] = useState<boolean>(false);
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
@@ -156,6 +163,39 @@ export const MerchantProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [reviews, setReviews] = useState<Review[]>(INITIAL_REVIEWS);
   const [notifications, setNotifications] = useState<NotificationItem[]>(INITIAL_NOTIFICATIONS);
 
+  // Initial Registration Record for Arjawinangun local merchant
+  const [registrationData, setRegistrationData] = useState<MerchantRegistrationData>({
+    id: 'reg_arja_001',
+    ownerName: 'Hj. Siti Fatimah',
+    ownerPhone: '085224158990',
+    isPhoneOtpVerified: true,
+    email: 'siti.warungarja@gmail.com',
+    password: '••••••••',
+    passwordConfirmation: '••••••••',
+    ownerPhotoUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80',
+    storeName: 'Warung Nasi Jamblang & Empal Bu Siti',
+    storeCategory: 'Warung Makan & Kuliner Tradisional',
+    storeWhatsapp: '085224158990',
+    storeLogoUrl: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=400&q=80',
+    storeDescription: 'Nasi jamblang daun jati asli, empal gentong kuah santan gurih, tahu tempe bacem, sambal terasi khas Arjawinangun.',
+    productTypes: ['Makanan Siap Saji / Lauk Pauk', 'Minuman Dingin & Hangat', 'Camilan & Kerupuk Tradisional'],
+    fullAddress: 'Jl. Raya By Pass Arjawinangun No. 88, Blok Karang Moncol RT.03/RW.02',
+    village: 'Jungjang',
+    district: 'Arjawinangun',
+    gpsLocation: {
+      lat: -6.6508,
+      lng: 108.4124,
+      label: 'Depan Pasar Gaya Arjawinangun Cirebon',
+    },
+    openingHours: '06:00',
+    closingHours: '21:00',
+    operationalDays: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
+    ktpPhotoUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80',
+    agreedToTerms: true,
+    status: 'Menunggu Verifikasi',
+    submittedAt: '2026-03-28T09:15:00Z',
+  });
+
   const currentStore = stores.find((s) => s.id === currentStoreId) || stores[0];
 
   // Helper Toast
@@ -171,14 +211,113 @@ export const MerchantProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setToasts((prev) => prev.filter((t) => t.id !== id));
   }, []);
 
-  // Update Merchant Status
+  // Update Merchant Status & Synchronize Registration State
   const updateMerchantStatus = (status: MerchantStatus) => {
     setMerchant((prev) => ({ ...prev, status }));
-    // Update store verification flag accordingly
     setStores((prev) =>
       prev.map((s) => (s.merchantId === merchant.id ? { ...s, isVerified: status === 'Verified' } : s))
     );
-    addToast('info', 'Status Mitra Diperbarui', `Status merchant berhasil diubah menjadi: ${status}`);
+    
+    // Sync Indonesian registration status
+    const mappedRegStatus: RegistrationVerificationStatus =
+      status === 'Verified' ? 'Disetujui' : status === 'Pending' ? 'Menunggu Verifikasi' : 'Ditolak';
+    setRegistrationData((prev) => ({
+      ...prev,
+      status: mappedRegStatus,
+      reviewedAt: new Date().toISOString(),
+      rejectionReason: status === 'Rejected' ? 'Verifikasi berkas belum memenuhi persyaratan standar kepatuhan AWD.' : undefined,
+    }));
+
+    addToast('info', 'Status Mitra Diperbarui', `Status merchant: ${status} (${mappedRegStatus})`);
+  };
+
+  // Update Registration Status lifecycle explicitly
+  const updateRegistrationStatus = (status: RegistrationVerificationStatus, reason?: string) => {
+    setRegistrationData((prev) => ({
+      ...prev,
+      status,
+      reviewedAt: new Date().toISOString(),
+      rejectionReason: status === 'Ditolak' ? (reason || 'Foto KTP tidak terbaca jelas atau koordinat GPS berada di luar jangkauan pengantaran.') : undefined,
+    }));
+
+    if (status === 'Disetujui') {
+      setMerchant((prev) => ({ ...prev, status: 'Verified' }));
+      setStores((prev) =>
+        prev.map((s) => ({ ...s, isVerified: true }))
+      );
+      addToast('success', 'Pendaftaran Disetujui!', 'Selamat! Akun warung telah disetujui. Toko siap menerima pesanan, kelola stok & pencairan dana.');
+    } else if (status === 'Menunggu Verifikasi') {
+      setMerchant((prev) => ({ ...prev, status: 'Pending' }));
+      setStores((prev) =>
+        prev.map((s) => ({ ...s, isVerified: false }))
+      );
+      addToast('info', 'Status: Menunggu Verifikasi', 'Pengajuan pendaftaran sedang ditinjau oleh Tim Operasional AWD Arjawinangun.');
+    } else {
+      setMerchant((prev) => ({ ...prev, status: 'Rejected' }));
+      setStores((prev) =>
+        prev.map((s) => ({ ...s, isVerified: false }))
+      );
+      addToast('error', 'Pendaftaran Ditolak', reason || 'Periksa kembali dokumen KTP dan titik GPS lokasi warung Anda.');
+    }
+  };
+
+  // Submit New Merchant Registration Form
+  const submitMerchantRegistration = (data: Omit<MerchantRegistrationData, 'id' | 'status' | 'submittedAt'>) => {
+    const newId = 'reg_' + Date.now();
+    const newReg: MerchantRegistrationData = {
+      ...data,
+      id: newId,
+      status: 'Menunggu Verifikasi',
+      submittedAt: new Date().toISOString(),
+    };
+    setRegistrationData(newReg);
+
+    // Update merchant profile with owner info
+    setMerchant((prev) => ({
+      ...prev,
+      ownerName: data.ownerName,
+      phone: data.ownerPhone,
+      email: data.email || prev.email,
+      status: 'Pending',
+      verificationDocs: {
+        ...prev.verificationDocs,
+        ktpUrl: data.ktpPhotoUrl || prev.verificationDocs.ktpUrl,
+        submittedAt: new Date().toISOString(),
+      },
+    }));
+
+    // Create and add new store into store list
+    const newStoreId = 'str_' + Date.now();
+    const createdStore: Store = {
+      id: newStoreId,
+      merchantId: merchant.id,
+      name: data.storeName,
+      description: data.storeDescription || `Warung kuliner & usaha lokal di ${data.village}, ${data.district}.`,
+      logoUrl: data.storeLogoUrl,
+      bannerUrl: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80',
+      address: `${data.fullAddress}, Desa ${data.village}, Kec. ${data.district}, Cirebon`,
+      latitude: data.gpsLocation.lat,
+      longitude: data.gpsLocation.lng,
+      phone: data.ownerPhone,
+      whatsapp: data.storeWhatsapp || data.ownerPhone,
+      openingHours: data.openingHours,
+      closingHours: data.closingHours,
+      deliveryRadiusKm: 7,
+      category: data.storeCategory.includes('Kuliner') || data.storeCategory.includes('Warung Makan') ? 'Restaurant' : 'UMKM',
+      operationalStatus: 'Open',
+      isVerified: false,
+      rating: 5.0,
+      reviewCount: 0,
+    };
+
+    setStores((prev) => [createdStore, ...prev]);
+    setCurrentStoreId(newStoreId);
+
+    addToast(
+      'success',
+      'Pendaftaran Berhasil Dikirim!',
+      `Warung "${data.storeName}" berhasil didaftarkan. Status: Menunggu Verifikasi.`
+    );
   };
 
   // Update Current Store Info
@@ -669,6 +808,9 @@ export const MerchantProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         setDeviceView,
         isOffline,
         setIsOffline,
+        registrationData,
+        updateRegistrationStatus,
+        submitMerchantRegistration,
         toasts,
         addToast,
         removeToast,

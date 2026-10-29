@@ -13,23 +13,16 @@ import { DeviceFrameToggle } from './components/common/DeviceFrameToggle.tsx';
 import { DashboardView } from './components/dashboard/DashboardView.tsx';
 import { OrdersView } from './components/orders/OrdersView.tsx';
 import { ProductsView } from './components/products/ProductsView.tsx';
-import { InventoryView } from './components/inventory/InventoryView.tsx';
-import { PromotionsView } from './components/promotions/PromotionsView.tsx';
-import { ReviewsView } from './components/reviews/ReviewsView.tsx';
 import { WalletView } from './components/wallet/WalletView.tsx';
-import { ReportsView } from './components/reports/ReportsView.tsx';
 import { StoreManagementView } from './components/store/StoreManagementView.tsx';
-import { AuthAndVerificationView } from './components/auth/AuthAndVerificationView.tsx';
-import { SettingsView } from './components/settings/SettingsView.tsx';
+import { MerchantRegistrationView } from './components/auth/MerchantRegistrationView.tsx';
 import { NotificationCenterModal } from './components/notifications/NotificationCenterModal.tsx';
-import { FlutterCodeViewer } from './components/architecture/FlutterCodeViewer.tsx';
 
 const MerchantAppContent: React.FC = () => {
   const { activeTab, deviceView, isDarkMode } = useMerchant();
   const [isNotifOpen, setIsNotifOpen] = useState(false);
-  const [isCodeViewerOpen, setIsCodeViewerOpen] = useState(false);
 
-  // Render view by active tab
+  // Render view by active tab (Streamlined for pure Merchant operations)
   const renderActiveView = () => {
     switch (activeTab) {
       case 'dashboard':
@@ -37,24 +30,19 @@ const MerchantAppContent: React.FC = () => {
       case 'orders':
         return <OrdersView />;
       case 'products':
-        return <ProductsView />;
       case 'inventory':
-        return <InventoryView />;
-      case 'promotions':
-        return <PromotionsView />;
-      case 'reviews':
-        return <ReviewsView />;
+        return <ProductsView />;
       case 'wallet':
-        return <WalletView />;
       case 'reports':
-        return <ReportsView />;
+        return <WalletView />;
       case 'store':
+      case 'settings':
         return <StoreManagementView />;
+      case 'register':
+      case 'registration':
       case 'auth_docs':
       case 'profile':
-        return <AuthAndVerificationView />;
-      case 'settings':
-        return <SettingsView />;
+        return <MerchantRegistrationView />;
       default:
         return <DashboardView />;
     }
@@ -62,26 +50,24 @@ const MerchantAppContent: React.FC = () => {
 
   return (
     <div className={isDarkMode ? 'dark' : ''}>
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-['Plus_Jakarta_Sans',sans-serif] antialiased selection:bg-blue-600 selection:text-white">
+      <div className="h-screen overflow-hidden bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-['Plus_Jakarta_Sans',sans-serif] antialiased selection:bg-blue-600 selection:text-white flex flex-col">
         <Toasts />
         <NotificationCenterModal isOpen={isNotifOpen} onClose={() => setIsNotifOpen(false)} />
-        <FlutterCodeViewer isOpen={isCodeViewerOpen} onClose={() => setIsCodeViewerOpen(false)} />
 
         <DeviceFrameToggle>
-          <Navbar
-            onOpenNotifications={() => setIsNotifOpen(true)}
-            onOpenCodeViewer={() => setIsCodeViewerOpen(true)}
-          />
+          <div className="shrink-0 z-30">
+            <Navbar onOpenNotifications={() => setIsNotifOpen(true)} />
+          </div>
 
-          <div className="flex">
+          <div className="flex-1 flex overflow-hidden">
             {/* Desktop Sidebar (hidden on mobile) */}
-            {deviceView === 'desktop' && (
-              <Sidebar onOpenCodeViewer={() => setIsCodeViewerOpen(true)} />
-            )}
+            {deviceView === 'desktop' && <Sidebar />}
 
-            {/* Main Content Area */}
-            <main className="flex-1 p-3.5 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
-              {renderActiveView()}
+            {/* Main Content Area - Scrollable Pane */}
+            <main className="flex-1 overflow-y-auto p-3 sm:p-4 lg:p-5 w-full focus:outline-none">
+              <div className="max-w-7xl mx-auto w-full">
+                {renderActiveView()}
+              </div>
             </main>
           </div>
 

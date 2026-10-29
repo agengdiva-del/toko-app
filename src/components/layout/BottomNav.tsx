@@ -1,6 +1,6 @@
 import React from 'react';
 import { useMerchant } from '../../context/MerchantContext.tsx';
-import { LayoutDashboard, ShoppingBag, Package, Wallet, User, Tag, BarChart3, Star } from 'lucide-react';
+import { LayoutDashboard, ShoppingBag, Package, Wallet, Store } from 'lucide-react';
 
 interface BottomNavProps {
   onOpenMoreMenu?: () => void;
@@ -10,11 +10,11 @@ export const BottomNav: React.FC<BottomNavProps> = () => {
   const { activeTab, setActiveTab, newOrdersCount } = useMerchant();
 
   const navItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'dashboard', label: 'Ringkasan', icon: LayoutDashboard },
     { id: 'orders', label: 'Pesanan', icon: ShoppingBag, badge: newOrdersCount },
     { id: 'products', label: 'Produk', icon: Package },
     { id: 'wallet', label: 'Dompet', icon: Wallet },
-    { id: 'profile', label: 'Profil', icon: User },
+    { id: 'store', label: 'Warung', icon: Store },
   ];
 
   return (

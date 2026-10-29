@@ -4,65 +4,48 @@ import {
   LayoutDashboard,
   ShoppingBag,
   Package,
-  Boxes,
-  Tag,
-  Star,
-  BarChart3,
   Store,
   Wallet,
-  Settings,
-  ShieldCheck,
-  Code2,
-  HelpCircle,
-  FileText,
+  UserPlus,
 } from 'lucide-react';
 
-interface SidebarProps {
-  onOpenCodeViewer: () => void;
-}
-
-export const Sidebar: React.FC<SidebarProps> = ({ onOpenCodeViewer }) => {
+export const Sidebar: React.FC = () => {
   const { activeTab, setActiveTab, newOrdersCount, currentStore, merchant } = useMerchant();
 
+  // 6 Essential Merchant Modules
   const primaryNav = [
     { id: 'dashboard', label: 'Ringkasan Bisnis', icon: LayoutDashboard },
     { id: 'orders', label: 'Kelola Pesanan', icon: ShoppingBag, badge: newOrdersCount },
-    { id: 'products', label: 'Daftar Produk', icon: Package },
-    { id: 'inventory', label: 'Manajemen Stok', icon: Boxes },
-    { id: 'promotions', label: 'Promosi & Diskon', icon: Tag },
-    { id: 'reviews', label: 'Ulasan Pelanggan', icon: Star },
-    { id: 'reports', label: 'Laporan Penjualan', icon: BarChart3 },
-    { id: 'wallet', label: 'Dompet & Pencairan', icon: Wallet },
-    { id: 'store', label: 'Profil & Lokasi Toko', icon: Store },
-    { id: 'auth_docs', label: 'Dokumen & Verifikasi', icon: ShieldCheck },
-    { id: 'settings', label: 'Pengaturan Akun', icon: Settings },
+    { id: 'products', label: 'Produk & Variasi', icon: Package },
+    { id: 'wallet', label: 'Pendapatan & Pencairan', icon: Wallet },
+    { id: 'register', label: 'Pendaftaran & Status Akun', icon: UserPlus, specialTag: 'Mitra' },
+    { id: 'store', label: 'Profil & Jam Warung', icon: Store },
   ];
 
   return (
-    <aside className="w-64 shrink-0 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-4 flex flex-col justify-between hidden md:flex min-h-[calc(100vh-4rem)]">
+    <aside className="w-56 shrink-0 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-2.5 flex flex-col justify-between hidden md:flex h-full overflow-y-auto">
       <div>
-        {/* Merchant Card with AWD Logo */}
-        <div className="flex items-center gap-3 p-3 rounded-2xl bg-gradient-to-br from-blue-50/80 via-indigo-50/40 to-slate-50 dark:from-slate-800/90 dark:to-slate-850 border border-blue-100 dark:border-blue-900/50 mb-5 shadow-sm">
+        {/* Merchant Identity Card */}
+        <div className="flex items-center gap-2.5 p-2 rounded-xl bg-gradient-to-br from-blue-50/80 via-indigo-50/40 to-slate-50 dark:from-slate-800/90 dark:to-slate-850 border border-blue-100 dark:border-blue-900/50 mb-2.5 shadow-xs">
           <div className="relative shrink-0">
             <img
               src="/assets/aistudio/Designer_b056b7f0.png"
-              alt="AWD Ecosystem"
-              className="w-11 h-11 rounded-xl object-contain bg-white p-0.5 border border-blue-200 dark:border-blue-800 shadow-sm"
+              alt="AWD Merchant"
+              className="w-8 h-8 rounded-lg object-contain bg-white p-0.5 border border-blue-200 dark:border-blue-800 shadow-xs"
             />
-            <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-blue-600 border-2 border-white dark:border-slate-800 flex items-center justify-center text-[7px] text-white font-black">
+            <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-blue-600 border border-white dark:border-slate-800 flex items-center justify-center text-[6px] text-white font-black">
               ✓
             </span>
           </div>
           <div className="min-w-0 flex-1">
-            <h4 className="text-xs font-extrabold text-slate-900 dark:text-white truncate">{currentStore.name}</h4>
-            <p className="text-[11px] text-blue-600 dark:text-blue-400 font-medium truncate">{merchant.ownerName}</p>
-            <span className="inline-block text-[9px] uppercase font-bold tracking-wider text-slate-400 dark:text-slate-500">AWD Merchant Hub</span>
+            <h4 className="text-[11px] font-extrabold text-slate-900 dark:text-white truncate">{currentStore.name}</h4>
+            <p className="text-[10px] text-blue-600 dark:text-blue-400 font-medium truncate">{merchant.ownerName}</p>
           </div>
         </div>
 
         {/* Menu Section */}
-        <div className="space-y-1">
-          <p className="text-[10px] uppercase font-bold tracking-wider text-slate-400 px-3 py-1">Menu Utama</p>
+        <div className="space-y-0.5">
+          <p className="text-[9px] uppercase font-bold tracking-wider text-slate-400 px-2.5 py-0.5">Menu Merchant</p>
           {primaryNav.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -70,18 +53,25 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenCodeViewer }) => {
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
+                className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs font-semibold transition-all ${
                   isActive
-                    ? 'bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-600 text-white shadow-md shadow-blue-500/25 font-bold'
+                    ? 'bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-600 text-white shadow-sm font-bold'
                     : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60'
                 }`}
               >
-                <div className="flex items-center gap-2.5">
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400 dark:text-slate-400'}`} />
-                  <span>{item.label}</span>
+                <div className="flex items-center gap-2 truncate">
+                  <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-white' : 'text-slate-400 dark:text-slate-400'}`} />
+                  <span className="truncate">{item.label}</span>
                 </div>
+                {item.specialTag && (
+                  <span className={`text-[8px] font-black uppercase tracking-wider px-1.5 py-0.2 rounded-full ${
+                    isActive ? 'bg-white text-blue-700' : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-xs'
+                  }`}>
+                    {item.specialTag}
+                  </span>
+                )}
                 {Boolean(item.badge && item.badge > 0) && (
-                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
+                  <span className={`text-[9px] font-bold px-1.5 py-0.2 rounded-full ${
                     isActive ? 'bg-white text-blue-700' : 'bg-orange-500 text-white animate-pulse'
                   }`}>
                     {item.badge}
@@ -93,24 +83,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenCodeViewer }) => {
         </div>
       </div>
 
-      {/* Bottom Technical Resources */}
-      <div className="pt-4 border-t border-slate-200 dark:border-slate-800 space-y-2">
-        <button
-          onClick={onOpenCodeViewer}
-          className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/60 hover:bg-indigo-100 transition-colors"
-        >
-          <Code2 className="w-4 h-4 shrink-0" />
-          <div className="text-left">
-            <p className="leading-none">Flutter & SQL Schema</p>
-            <p className="text-[10px] opacity-75 font-normal mt-0.5">Kode Sumber & 17 Tabel</p>
-          </div>
-        </button>
-
-        <div className="p-3 rounded-xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/40 text-[11px] text-blue-900 dark:text-blue-200">
-          <p className="font-bold flex items-center gap-1.5">
-            <span>🛡️ Mitra AWD Terverifikasi</span>
+      {/* Bottom Information Card */}
+      <div className="pt-2 mt-2 border-t border-slate-200 dark:border-slate-800 space-y-2">
+        <div className="p-2 rounded-lg bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200/80 dark:border-blue-800/40 text-[10px] text-blue-900 dark:text-blue-200">
+          <p className="font-extrabold flex items-center gap-1 text-[11px]">
+            <span>🏪 Portal Khusus Merchant</span>
           </p>
-          <p className="text-[10px] opacity-90 mt-0.5">Arjawinangun Delivery • Komisi 10% dipotong otomatis dari tiap pesanan selesai.</p>
+          <p className="text-[9px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+            Arjawinangun Delivery (AWD). Aplikasi pelanggan & driver terpisah di sistem AWD.
+          </p>
         </div>
       </div>
     </aside>

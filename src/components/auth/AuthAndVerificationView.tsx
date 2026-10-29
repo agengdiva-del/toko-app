@@ -17,6 +17,7 @@ import {
   FileCheck,
 } from 'lucide-react';
 import { MerchantStatus } from '../../types/index.ts';
+import { MerchantRegistrationView } from './MerchantRegistrationView.tsx';
 
 export const AuthAndVerificationView: React.FC = () => {
   const { merchant, updateMerchantStatus, currentStore, addToast } = useMerchant();
@@ -93,6 +94,17 @@ export const AuthAndVerificationView: React.FC = () => {
           }`}
         >
           Metode Login (WhatsApp / Email / Google)
+        </button>
+        <button
+          onClick={() => setActiveSubTab('registration')}
+          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+            activeSubTab === 'registration'
+              ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm shadow-blue-500/25'
+              : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+          }`}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-ping" />
+          <span>Form Pendaftaran Mitra Baru</span>
         </button>
       </div>
 
@@ -426,6 +438,13 @@ export const AuthAndVerificationView: React.FC = () => {
               Simulasikan Masuk Dashboard
             </button>
           </form>
+        </div>
+      )}
+
+      {/* Registration Form Tab Content */}
+      {activeSubTab === 'registration' && (
+        <div className="pt-2">
+          <MerchantRegistrationView />
         </div>
       )}
     </div>

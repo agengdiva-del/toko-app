@@ -85,12 +85,12 @@ export const OrdersView: React.FC = () => {
   };
 
   return (
-    <div className="space-y-5 pb-20 md:pb-8">
+    <div className="space-y-3.5 pb-6">
       {/* Page Header with Action Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">Kelola Pesanan</h1>
+            <h1 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">Kelola Pesanan</h1>
             {newCount > 0 && (
               <span className="bg-orange-500 text-white font-extrabold text-xs px-2.5 py-0.5 rounded-full animate-pulse shadow-sm shadow-orange-500/30">
                 {newCount} Pesanan Baru
@@ -106,15 +106,15 @@ export const OrdersView: React.FC = () => {
         <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={simulateIncomingOrder}
-            className="px-3.5 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-bold text-xs shadow-md shadow-orange-500/20 flex items-center gap-1.5 transition-all"
+            className="px-3 py-1.5 rounded-lg bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-bold text-xs shadow-sm shadow-orange-500/20 flex items-center gap-1.5 transition-all"
           >
-            <Zap className="w-4 h-4 fill-current" />
-            <span>+ Simulasi Order Masuk</span>
+            <Zap className="w-3.5 h-3.5 fill-current" />
+            <span>+ Simulasi Order</span>
           </button>
 
           <button
             onClick={() => setAutoSimulate(!autoSimulate)}
-            className={`px-3 py-2 rounded-xl text-xs font-semibold border transition-all ${
+            className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
               autoSimulate
                 ? 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-300 text-emerald-700 dark:text-emerald-300 font-bold'
                 : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'
@@ -126,7 +126,7 @@ export const OrdersView: React.FC = () => {
       </div>
 
       {/* Filter Tabs & Search */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-800 p-3 rounded-2xl border border-slate-200 dark:border-slate-700/60 shadow-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 bg-white dark:bg-slate-800 p-2 sm:p-2.5 rounded-xl border border-slate-200 dark:border-slate-700/60 shadow-sm">
         {/* Status Filter Tabs */}
         <div className="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
           {[
