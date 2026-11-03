@@ -2,6 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      // Guard for browser extensions intercepting window.fetch
+      (function() {
+        try {
+          var _orig = window.fetch;
+          var _curr = typeof _orig === 'function' ? _orig.bind(window) : _orig;
+          Object.defineProperty(window, 'fetch', {
+            get: function() { return _curr; },
+            set: function(v) { _curr = v; },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {}
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AWD Mitra Merchant - Portal Khusus Pemilik Toko & Warung</title>
     <meta name="description" content="Aplikasi khusus pemilik warung dan toko lokal Arjawinangun Delivery (AWD). Kelola produk & variasi, terima/tolak pesanan, buka/tutup warung, dan pencairan dana." />

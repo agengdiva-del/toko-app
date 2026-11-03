@@ -11,6 +11,7 @@ import {
   Sun,
   ShieldCheck,
   ShieldAlert,
+  Shield,
   ChevronDown,
   Code2,
   Zap,
@@ -287,6 +288,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenNotifications }) => {
           >
             {soundEnabled ? <Volume2 className="w-3.5 h-3.5 text-blue-600" /> : <VolumeX className="w-3.5 h-3.5 text-slate-400" />}
           </button>
+
+          {/* AWD Admin Panel Link */}
+          <a
+            href="/admin"
+            target="_blank"
+            rel="noreferrer"
+            title="Buka Panel Admin AWD (Express Backend Live)"
+            className="h-8 px-2 rounded-lg border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-100 text-indigo-700 dark:text-indigo-300 transition-colors flex items-center gap-1 text-xs font-semibold shadow-xs"
+          >
+            <Shield className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+            <span className="hidden md:inline">Admin</span>
+          </a>
 
           {/* Device Viewport Toggle (Phone Frame vs Desktop) */}
           <button

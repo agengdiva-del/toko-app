@@ -7,6 +7,8 @@ import {
   Store,
   Wallet,
   UserPlus,
+  Shield,
+  ExternalLink,
 } from 'lucide-react';
 
 export const Sidebar: React.FC = () => {
@@ -83,14 +85,28 @@ export const Sidebar: React.FC = () => {
         </div>
       </div>
 
-      {/* Bottom Information Card */}
+      {/* Bottom Information Card & Admin Panel Link */}
       <div className="pt-2 mt-2 border-t border-slate-200 dark:border-slate-800 space-y-2">
+        <a
+          href="/admin"
+          target="_blank"
+          rel="noreferrer"
+          className="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-bold bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/60 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 transition-colors"
+          title="Buka Panel Admin AWD (Terhubung ke Backend Live)"
+        >
+          <div className="flex items-center gap-1.5">
+            <Shield className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+            <span className="text-[11px]">Panel Admin AWD</span>
+          </div>
+          <ExternalLink className="w-3 h-3 opacity-60" />
+        </a>
+
         <div className="p-2 rounded-lg bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200/80 dark:border-blue-800/40 text-[10px] text-blue-900 dark:text-blue-200">
           <p className="font-extrabold flex items-center gap-1 text-[11px]">
             <span>🏪 Portal Khusus Merchant</span>
           </p>
           <p className="text-[9px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
-            Arjawinangun Delivery (AWD). Aplikasi pelanggan & driver terpisah di sistem AWD.
+            Arjawinangun Delivery (AWD). Terhubung langsung ke REST API Backend v1.
           </p>
         </div>
       </div>

@@ -163,36 +163,36 @@ export const MerchantProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [reviews, setReviews] = useState<Review[]>(INITIAL_REVIEWS);
   const [notifications, setNotifications] = useState<NotificationItem[]>(INITIAL_NOTIFICATIONS);
 
-  // Initial Registration Record for Arjawinangun local merchant
+  // Initial Registration Record for Arjawinangun local merchant (Warung Bu Iis - M1)
   const [registrationData, setRegistrationData] = useState<MerchantRegistrationData>({
-    id: 'reg_arja_001',
-    ownerName: 'Hj. Siti Fatimah',
-    ownerPhone: '085224158990',
+    id: 'M1',
+    ownerName: 'Imas S.',
+    ownerPhone: '0812-1000-1000',
     isPhoneOtpVerified: true,
-    email: 'siti.warungarja@gmail.com',
+    email: 'warung.bu.iis@mail.id',
     password: '••••••••',
     passwordConfirmation: '••••••••',
     ownerPhotoUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80',
-    storeName: 'Warung Nasi Jamblang & Empal Bu Siti',
+    storeName: 'Warung Bu Iis',
     storeCategory: 'Warung Makan & Kuliner Tradisional',
-    storeWhatsapp: '085224158990',
+    storeWhatsapp: '081210001000',
     storeLogoUrl: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=400&q=80',
-    storeDescription: 'Nasi jamblang daun jati asli, empal gentong kuah santan gurih, tahu tempe bacem, sambal terasi khas Arjawinangun.',
+    storeDescription: 'Nasi jamblang komplit daun jati, empal gentong kuah santan gurih, tahu gejrot khas Cirebon, es teh manis segar.',
     productTypes: ['Makanan Siap Saji / Lauk Pauk', 'Minuman Dingin & Hangat', 'Camilan & Kerupuk Tradisional'],
-    fullAddress: 'Jl. Raya By Pass Arjawinangun No. 88, Blok Karang Moncol RT.03/RW.02',
+    fullAddress: 'Jl. Ki Hajar Dewantara No. 8, Arjawinangun',
     village: 'Jungjang',
     district: 'Arjawinangun',
     gpsLocation: {
       lat: -6.6508,
       lng: 108.4124,
-      label: 'Depan Pasar Gaya Arjawinangun Cirebon',
+      label: 'Jl. Ki Hajar Dewantara No. 8, Arjawinangun, Cirebon',
     },
-    openingHours: '06:00',
+    openingHours: '07:00',
     closingHours: '21:00',
     operationalDays: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
     ktpPhotoUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80',
     agreedToTerms: true,
-    status: 'Menunggu Verifikasi',
+    status: 'Disetujui',
     submittedAt: '2026-03-28T09:15:00Z',
   });
 
@@ -211,6 +211,102 @@ export const MerchantProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setToasts((prev) => prev.filter((t) => t.id !== id));
   }, []);
 
+  // Sync with Live AWD Backend API (/api/v1/data)
+  const syncWithBackend = useCallback(async () => {
+    try {
+      const res = await fetch('/api/v1/data');
+      if (!res.ok) return;
+      const data = await res.json();
+      if (!data) return;
+
+      // 1. Check M1 merchant verification and store status
+      const m1 = data.D?.find((d: any) => d.id === 'M1' || (d.t === 'merchant' && (d.name.includes('Bu Iis') || d.name.includes('Bu Siti'))));
+      if (m1) {
+        if (m1.x?.vf) {
+          const mappedStatus: RegistrationVerificationStatus =
+            m1.x.vf === 'Disetujui' ? 'Disetujui' : m1.x.vf === 'Ditolak' ? 'Ditolak' : 'Menunggu Verifikasi';
+          setRegistrationData((prev) => ({
+            ...prev,
+            status: mappedStatus,
+            rejectionReason: m1.x.alasan,
+          }));
+          setMerchant((prev) => ({
+            ...prev,
+            status: mappedStatus === 'Disetujui' ? 'Verified' : mappedStatus === 'Ditolak' ? 'Rejected' : 'Pending',
+          }));
+          setStores((prev) =>
+            prev.map((s) => ({
+              ...s,
+              isVerified: mappedStatus === 'Disetujui',
+              operationalStatus: m1.s === 'Buka' ? 'Open' : m1.s === 'Tutup' ? 'Closed' : s.operationalStatus,
+            }))
+          );
+        }
+      }
+
+      // 2. Sync Products for M1
+      if (data.PR && data.PR['M1'] && Array.isArray(data.PR['M1']) && data.PR['M1'].length > 0) {
+        setProducts((prev) => {
+          const backendPrds = data.PR['M1'];
+          return prev.map((p) => {
+            const match = backendPrds.find((bp: any) => bp.id === p.id || bp.n === p.name);
+            if (match) {
+              return {
+                ...p,
+                price: Number(match.h) || p.price,
+                stock: match.st !== undefined ? Number(match.st) : p.stock,
+                status: Number(match.st) <= 0 ? 'OutOfStock' : (match.on === 0 ? 'Inactive' : 'Active'),
+              };
+            }
+            return p;
+          });
+        });
+      }
+
+      // 3. Sync Orders
+      if (data.O && Array.isArray(data.O)) {
+        setOrders((prev) =>
+          prev.map((ord) => {
+            const match = data.O.find((bo: any) => bo.id === ord.id);
+            if (match) {
+              const statusMap: Record<string, OrderStatus> = {
+                'Baru': 'New',
+                'Diproses': 'Preparing',
+                'Siap Diambil': 'ReadyForPickup',
+                'Diantar': 'OnDelivery',
+                'Selesai': 'Delivered',
+                'Dibatalkan': 'Cancelled',
+              };
+              const mappedStatus = statusMap[match.s] || ord.status;
+              const updated = { ...ord, status: mappedStatus };
+              if (match.d && (!ord.assignedDriver || ord.assignedDriver.name !== match.d)) {
+                updated.assignedDriver = {
+                  id: 'drv_' + match.d.replace(/\s+/g, '_').toLowerCase(),
+                  name: match.d,
+                  phone: '0812-1000-8640',
+                  vehicleNumber: 'E 2131 AB',
+                  vehicleType: 'Motor AWD',
+                  avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80',
+                  rating: 4.8,
+                };
+              }
+              return updated;
+            }
+            return ord;
+          })
+        );
+      }
+    } catch (err) {
+      // quiet fail for background polling
+    }
+  }, []);
+
+  useEffect(() => {
+    syncWithBackend();
+    const interval = setInterval(syncWithBackend, 6000);
+    return () => clearInterval(interval);
+  }, [syncWithBackend]);
+
   // Update Merchant Status & Synchronize Registration State
   const updateMerchantStatus = (status: MerchantStatus) => {
     setMerchant((prev) => ({ ...prev, status }));
@@ -227,6 +323,13 @@ export const MerchantProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       reviewedAt: new Date().toISOString(),
       rejectionReason: status === 'Rejected' ? 'Verifikasi berkas belum memenuhi persyaratan standar kepatuhan AWD.' : undefined,
     }));
+
+    // Notify backend
+    fetch('/api/v1/pengguna/M1/verifikasi', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: mappedRegStatus }),
+    }).catch(() => {});
 
     addToast('info', 'Status Mitra Diperbarui', `Status merchant: ${status} (${mappedRegStatus})`);
   };
@@ -259,6 +362,13 @@ export const MerchantProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       );
       addToast('error', 'Pendaftaran Ditolak', reason || 'Periksa kembali dokumen KTP dan titik GPS lokasi warung Anda.');
     }
+
+    // Persist verification change to backend API
+    fetch('/api/v1/pengguna/M1/verifikasi', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status, alasan: reason }),
+    }).catch((err) => console.warn('Verification sync failed:', err));
   };
 
   // Submit New Merchant Registration Form
@@ -313,6 +423,13 @@ export const MerchantProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setStores((prev) => [createdStore, ...prev]);
     setCurrentStoreId(newStoreId);
 
+    // Send to AWD backend API /api/v1/auth/register
+    fetch('/api/v1/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    }).catch((err) => console.warn('Registration backend sync notice:', err));
+
     addToast(
       'success',
       'Pendaftaran Berhasil Dikirim!',
@@ -323,6 +440,13 @@ export const MerchantProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   // Update Current Store Info
   const updateCurrentStore = (data: Partial<Store>) => {
     setStores((prev) => prev.map((s) => (s.id === currentStore.id ? { ...s, ...data } : s)));
+    if (data.operationalStatus) {
+      fetch('/api/v1/pengguna/merchant/M1', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ s: data.operationalStatus === 'Open' ? 'Buka' : 'Tutup' }),
+      }).catch(() => {});
+    }
     addToast('success', 'Toko Diperbarui', 'Informasi operasional toko berhasil disimpan.');
   };
 
@@ -338,6 +462,11 @@ export const MerchantProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setOrders((prev) =>
       prev.map((o) => (o.id === orderId ? { ...o, status: 'Accepted' as OrderStatus } : o))
     );
+    fetch(`/api/v1/pesanan/${orderId}/status`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: 'Diproses' }),
+    }).catch(() => {});
     addToast('success', 'Pesanan Diterima', 'Pesanan masuk ke tahap persiapan dapur.');
   };
 
@@ -361,6 +490,11 @@ export const MerchantProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         o.id === orderId ? { ...o, status: 'Cancelled' as OrderStatus, rejectReason: reason } : o
       )
     );
+    fetch(`/api/v1/pesanan/${orderId}/status`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: 'Dibatalkan' }),
+    }).catch(() => {});
     addToast('info', 'Pesanan Ditolak', `Pesanan telah dibatalkan: ${reason}`);
   };
 
@@ -368,6 +502,11 @@ export const MerchantProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setOrders((prev) =>
       prev.map((o) => (o.id === orderId ? { ...o, status: 'Preparing' as OrderStatus } : o))
     );
+    fetch(`/api/v1/pesanan/${orderId}/status`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: 'Diproses' }),
+    }).catch(() => {});
     addToast('info', 'Sedang Disiapkan', 'Pesanan dalam proses peracikan bumbu / masak.');
   };
 
@@ -394,6 +533,11 @@ export const MerchantProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           : o
       )
     );
+    fetch(`/api/v1/pesanan/${orderId}/status`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: 'Diantar', driver: mockDriver.name }),
+    }).catch(() => {});
     addToast('success', 'Siap Diambil Driver', 'Driver MitraArja telah dihubungi untuk penjemputan.');
   };
 
@@ -449,6 +593,12 @@ export const MerchantProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setOrders((prev) =>
       prev.map((o) => (o.id === orderId ? { ...o, status: 'Completed' as OrderStatus } : o))
     );
+
+    fetch(`/api/v1/pesanan/${orderId}/status`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: 'Selesai' }),
+    }).catch(() => {});
 
     // Notification
     const notif: NotificationItem = {
@@ -563,17 +713,41 @@ export const MerchantProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       createdAt: new Date().toISOString(),
     };
     setProducts((prev) => [newProd, ...prev]);
+
+    // Sync with backend API
+    fetch('/api/v1/produk', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        merchantId: 'M1',
+        n: item.name,
+        k: item.categoryId,
+        h: item.price,
+        st: item.stock,
+        d: item.description,
+        img: item.imageUrl,
+      }),
+    }).catch(() => {});
+
     addToast('success', 'Produk Ditambahkan', `Produk "${item.name}" berhasil dipublikasikan.`);
   };
 
   const updateProduct = (id: string, data: Partial<Product>) => {
     setProducts((prev) => prev.map((p) => (p.id === id ? { ...p, ...data } : p)));
+    fetch(`/api/v1/produk/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    }).catch(() => {});
     addToast('success', 'Produk Diperbarui', 'Perubahan produk berhasil disimpan.');
   };
 
   const deleteProduct = (id: string) => {
     const prod = products.find((p) => p.id === id);
     setProducts((prev) => prev.filter((p) => p.id !== id));
+    fetch(`/api/v1/produk/${id}`, {
+      method: 'DELETE',
+    }).catch(() => {});
     addToast('info', 'Produk Dihapus', `Produk "${prod?.name || ''}" telah dihapus dari etalase.`);
   };
 
@@ -644,6 +818,13 @@ export const MerchantProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       };
       setNotifications((prev) => [alertNotif, ...prev]);
     }
+
+    // Sync with backend API
+    fetch(`/api/v1/produk/${productId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ st: nextStock }),
+    }).catch(() => {});
 
     addToast('success', 'Stok Diperbarui', `Stok "${prod.name}" kini menjadi ${nextStock}.`);
   };

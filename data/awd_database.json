@@ -1,0 +1,930 @@
+{
+  "D": [
+    {
+      "id": "M1",
+      "t": "merchant",
+      "name": "Warung Bu Iis",
+      "sub": "Imas S.",
+      "area": "Arjawinangun",
+      "n": 412,
+      "r": "4.7",
+      "s": "Buka",
+      "adr": "Jl. Ki Hajar Dewantara No. 8, Arjawinangun",
+      "hp": "0813-1037-1053",
+      "plate": "E 2131 CD",
+      "jn": "Feb 2026",
+      "x": {
+        "email": "warung.bu.iis@mail.id",
+        "login": "Kata sandi",
+        "gps": "-6.711, 108.421",
+        "kat": "Kue",
+        "jam": "07.00-21.00",
+        "ktp": "3209100000007919",
+        "ktpf": "ktp_1.jpg",
+        "bank": "BRI",
+        "rek": "002110000313",
+        "an": "Warung Bu Iis",
+        "vf": "Disetujui"
+      }
+    },
+    {
+      "id": "M2",
+      "t": "merchant",
+      "name": "Toko Kue Sari Rasa",
+      "sub": "Rina W.",
+      "area": "Susukan",
+      "n": 327,
+      "r": "4.4",
+      "s": "Buka",
+      "adr": "Jl. Pahlawan No. 15, Susukan",
+      "hp": "0814-1074-1106",
+      "plate": "E 2262 XY",
+      "jn": "Mar 2026",
+      "x": {
+        "email": "toko.kue.sari.rasa@mail.id",
+        "login": "OTP",
+        "gps": "-6.712, 108.422",
+        "kat": "Makanan",
+        "jam": "07.00-21.00",
+        "ktp": "3209100000015838",
+        "ktpf": "ktp_2.jpg",
+        "bank": "BRI",
+        "rek": "002110000626",
+        "an": "Toko Kue Sari Rasa",
+        "vf": "Disetujui"
+      }
+    },
+    {
+      "id": "M3",
+      "t": "merchant",
+      "name": "Bakso Pak Darto",
+      "sub": "Darto",
+      "area": "Palimanan",
+      "n": 289,
+      "r": "4.1",
+      "s": "Tutup",
+      "adr": "Jl. Cirebon–Bandung No. 22, Palimanan",
+      "hp": "0815-1111-1159",
+      "plate": "E 2393 QZ",
+      "jn": "Apr 2026",
+      "x": {
+        "email": "bakso.pak.darto@mail.id",
+        "login": "Akun Google",
+        "gps": "-6.713, 108.423",
+        "kat": "Minuman",
+        "jam": "07.00-21.00",
+        "ktp": "3209100000023757",
+        "ktpf": "ktp_3.jpg",
+        "bank": "BRI",
+        "rek": "002110000939",
+        "an": "Bakso Pak Darto",
+        "vf": "Disetujui"
+      }
+    },
+    {
+      "id": "M4",
+      "t": "merchant",
+      "name": "Kopi Sawah",
+      "sub": "Yoga P.",
+      "area": "Gegesik",
+      "n": 251,
+      "r": "4.8",
+      "s": "Buka",
+      "adr": "Jl. Mawar No. 29, Gegesik",
+      "hp": "0816-1148-1212",
+      "plate": "E 2524 AB",
+      "jn": "Mei 2026",
+      "x": {
+        "email": "kopi.sawah@mail.id",
+        "login": "OTP",
+        "gps": "-6.714, 108.424",
+        "kat": "Makanan",
+        "jam": "07.00-21.00",
+        "ktp": "3209100000031676",
+        "ktpf": "ktp_4.jpg",
+        "bank": "BRI",
+        "rek": "002110001252",
+        "an": "Kopi Sawah",
+        "vf": "Disetujui"
+      }
+    },
+    {
+      "id": "M5",
+      "t": "merchant",
+      "name": "Ayam Geprek Mantap",
+      "sub": "Dewi A.",
+      "area": "Weru",
+      "n": 198,
+      "r": "4.5",
+      "s": "Buka",
+      "adr": "Jl. Raya Arjawinangun No. 36, Weru",
+      "hp": "0817-1185-1265",
+      "plate": "E 2655 CD",
+      "jn": "Jun 2026",
+      "x": {
+        "email": "ayam.geprek.mantap@mail.id",
+        "login": "Kata sandi",
+        "gps": "-6.715, 108.425",
+        "kat": "Obat & kesehatan",
+        "jam": "07.00-21.00",
+        "ktp": "3209100000039595",
+        "ktpf": "ktp_5.jpg",
+        "bank": "BRI",
+        "rek": "002110001565",
+        "an": "Ayam Geprek Mantap",
+        "vf": "Disetujui"
+      }
+    },
+    {
+      "id": "M6",
+      "t": "merchant",
+      "name": "Apotek Sehat",
+      "sub": "H. Rosid",
+      "area": "Plumbon",
+      "n": 143,
+      "r": "4.2",
+      "s": "Ditangguhkan",
+      "adr": "Jl. Ki Hajar Dewantara No. 43, Plumbon",
+      "hp": "0818-1222-1318",
+      "plate": "E 2786 XY",
+      "jn": "Jan 2026",
+      "x": {
+        "email": "apotek.sehat@mail.id",
+        "login": "OTP",
+        "gps": "-6.716, 108.426",
+        "kat": "Makanan",
+        "jam": "07.00-21.00",
+        "ktp": "3209100000047514",
+        "ktpf": "ktp_6.jpg",
+        "bank": "BRI",
+        "rek": "002110001878",
+        "an": "Apotek Sehat",
+        "vf": "Disetujui"
+      }
+    },
+    {
+      "id": "D7",
+      "t": "driver",
+      "name": "Asep Ruhiyat",
+      "sub": "Honda Beat",
+      "area": "Arjawinangun",
+      "n": 864,
+      "r": "4.9",
+      "s": "Aktif",
+      "adr": "Jl. Pahlawan No. 50, Arjawinangun",
+      "hp": "0819-1259-1371",
+      "plate": "E 2917 QZ",
+      "jn": "Feb 2026",
+      "x": {
+        "email": "asep.ruhiyat@mail.id",
+        "login": "Akun Google",
+        "gps": "-6.717, 108.427",
+        "ktp": "3209100000055433",
+        "ktpf": "ktp_7.jpg",
+        "sim": "123410024997",
+        "simf": "sim_7.jpg",
+        "stnkf": "stnk_7.jpg",
+        "bank": "DANA",
+        "rek": "08121005397",
+        "an": "Asep Ruhiyat",
+        "vf": "Disetujui"
+      }
+    },
+    {
+      "id": "D8",
+      "t": "driver",
+      "name": "Nandang S.",
+      "sub": "Yamaha Mio",
+      "area": "Klangenan",
+      "n": 702,
+      "r": "4.6",
+      "s": "Aktif",
+      "adr": "Jl. Cirebon–Bandung No. 57, Klangenan",
+      "hp": "0820-1296-1424",
+      "plate": "E 3048 AB",
+      "jn": "Mar 2026",
+      "x": {
+        "email": "nandang.s.@mail.id",
+        "login": "OTP",
+        "gps": "-6.718, 108.428",
+        "ktp": "3209100000063352",
+        "ktpf": "ktp_8.jpg",
+        "sim": "123410028568",
+        "simf": "sim_8.jpg",
+        "stnkf": "stnk_8.jpg",
+        "bank": "DANA",
+        "rek": "08121006168",
+        "an": "Nandang S.",
+        "vf": "Disetujui"
+      }
+    },
+    {
+      "id": "D9",
+      "t": "driver",
+      "name": "Tono Wijaya",
+      "sub": "Honda Vario",
+      "area": "Palimanan",
+      "n": 655,
+      "r": "4.3",
+      "s": "Tidak aktif",
+      "adr": "Jl. Mawar No. 4, Palimanan",
+      "hp": "0812-1333-1477",
+      "plate": "E 3179 CD",
+      "jn": "Apr 2026",
+      "x": {
+        "email": "tono.wijaya@mail.id",
+        "login": "Kata sandi",
+        "gps": "-6.719, 108.429",
+        "ktp": "3209100000071271",
+        "ktpf": "ktp_9.jpg",
+        "sim": "123410032139",
+        "simf": "sim_9.jpg",
+        "stnkf": "stnk_9.jpg",
+        "bank": "DANA",
+        "rek": "08121006939",
+        "an": "Tono Wijaya",
+        "vf": "Disetujui"
+      }
+    },
+    {
+      "id": "D10",
+      "t": "driver",
+      "name": "Yayan Mulyana",
+      "sub": "Suzuki Satria",
+      "area": "Jamblang",
+      "n": 590,
+      "r": "4.0",
+      "s": "Aktif",
+      "adr": "Jl. Raya Arjawinangun No. 11, Jamblang",
+      "hp": "0813-1370-1530",
+      "plate": "E 3310 XY",
+      "jn": "Mei 2026",
+      "x": {
+        "email": "yayan.mulyana@mail.id",
+        "login": "OTP",
+        "gps": "-6.720, 108.430",
+        "ktp": "3209100000079190",
+        "ktpf": "ktp_10.jpg",
+        "sim": "123410035710",
+        "simf": "sim_10.jpg",
+        "stnkf": "stnk_10.jpg",
+        "bank": "DANA",
+        "rek": "08121007710",
+        "an": "Yayan Mulyana",
+        "vf": "Disetujui"
+      }
+    },
+    {
+      "id": "D11",
+      "t": "driver",
+      "name": "Dede Kurnia",
+      "sub": "Honda Scoopy",
+      "area": "Weru",
+      "n": 12,
+      "r": "4.7",
+      "s": "Menunggu verifikasi",
+      "adr": "Jl. Ki Hajar Dewantara No. 18, Weru",
+      "hp": "0814-1407-1583",
+      "plate": "E 3441 QZ",
+      "jn": "Jun 2026",
+      "x": {
+        "email": "dede.kurnia@mail.id",
+        "login": "Akun Google",
+        "gps": "-6.721, 108.431",
+        "ktp": "3209100000087109",
+        "ktpf": "ktp_11.jpg",
+        "sim": "123410039281",
+        "simf": "sim_11.jpg",
+        "stnkf": "stnk_11.jpg",
+        "bank": "DANA",
+        "rek": "08121008481",
+        "an": "Dede Kurnia",
+        "vf": "Disetujui"
+      }
+    },
+    {
+      "id": "D12",
+      "t": "driver",
+      "name": "Iwan Setiawan",
+      "sub": "Yamaha NMAX",
+      "area": "Gegesik",
+      "n": 431,
+      "r": "4.4",
+      "s": "Aktif",
+      "adr": "Jl. Pahlawan No. 25, Gegesik",
+      "hp": "0815-1444-1636",
+      "plate": "E 3572 AB",
+      "jn": "Jan 2026",
+      "x": {
+        "email": "iwan.setiawan@mail.id",
+        "login": "OTP",
+        "gps": "-6.722, 108.432",
+        "ktp": "3209100000095028",
+        "ktpf": "ktp_12.jpg",
+        "sim": "123410042852",
+        "simf": "sim_12.jpg",
+        "stnkf": "stnk_12.jpg",
+        "bank": "DANA",
+        "rek": "08121009252",
+        "an": "Iwan Setiawan",
+        "vf": "Disetujui"
+      }
+    },
+    {
+      "id": "C13",
+      "t": "customer",
+      "name": "Siti Aminah",
+      "sub": "0812-3456-0001",
+      "area": "Arjawinangun",
+      "n": 58,
+      "r": "4.1",
+      "s": "Aktif",
+      "adr": "Jl. Cirebon–Bandung No. 32, Arjawinangun",
+      "hp": "0812-3456-0001",
+      "plate": "E 3703 CD",
+      "jn": "Feb 2026",
+      "x": {
+        "email": "",
+        "login": "Kata sandi",
+        "gps": "-6.723, 108.433",
+        "pay": "COD (bayar di tempat)"
+      }
+    },
+    {
+      "id": "C14",
+      "t": "customer",
+      "name": "Budi Hartono",
+      "sub": "0813-2211-0042",
+      "area": "Susukan",
+      "n": 41,
+      "r": "4.8",
+      "s": "Aktif",
+      "adr": "Jl. Mawar No. 39, Susukan",
+      "hp": "0813-2211-0042",
+      "plate": "E 3834 XY",
+      "jn": "Mar 2026",
+      "x": {
+        "email": "budi.hartono@mail.id",
+        "login": "OTP",
+        "gps": "-6.724, 108.434",
+        "pay": "Digital (QRIS/transfer/dompet)"
+      }
+    },
+    {
+      "id": "C15",
+      "t": "customer",
+      "name": "Lilis Suryani",
+      "sub": "0857-9000-0123",
+      "area": "Palimanan",
+      "n": 37,
+      "r": "4.5",
+      "s": "Aktif",
+      "adr": "Jl. Raya Arjawinangun No. 46, Palimanan",
+      "hp": "0857-9000-0123",
+      "plate": "E 3965 QZ",
+      "jn": "Apr 2026",
+      "x": {
+        "email": "",
+        "login": "Akun Google",
+        "gps": "-6.725, 108.435",
+        "pay": "COD (bayar di tempat)"
+      }
+    },
+    {
+      "id": "C16",
+      "t": "customer",
+      "name": "Agus Salim",
+      "sub": "0821-7788-0456",
+      "area": "Plumbon",
+      "n": 9,
+      "r": "4.2",
+      "s": "Belum verifikasi",
+      "adr": "Jl. Ki Hajar Dewantara No. 53, Plumbon",
+      "hp": "0821-7788-0456",
+      "plate": "E 4096 AB",
+      "jn": "Mei 2026",
+      "x": {
+        "email": "agus.salim@mail.id",
+        "login": "OTP",
+        "gps": "-6.726, 108.436",
+        "pay": "Digital (QRIS/transfer/dompet)"
+      }
+    },
+    {
+      "id": "C17",
+      "t": "customer",
+      "name": "Nur Hidayah",
+      "sub": "0896-1234-0789",
+      "area": "Gegesik",
+      "n": 22,
+      "r": "4.9",
+      "s": "Aktif",
+      "adr": "Jl. Pahlawan No. 60, Gegesik",
+      "hp": "0896-1234-0789",
+      "plate": "E 4227 CD",
+      "jn": "Jun 2026",
+      "x": {
+        "email": "",
+        "login": "Kata sandi",
+        "gps": "-6.727, 108.437",
+        "pay": "COD (bayar di tempat)"
+      }
+    },
+    {
+      "id": "C18",
+      "t": "customer",
+      "name": "Fajar R.",
+      "sub": "0878-5555-0321",
+      "area": "Weru",
+      "n": 3,
+      "r": "4.6",
+      "s": "Diblokir",
+      "adr": "Jl. Cirebon–Bandung No. 7, Weru",
+      "hp": "0878-5555-0321",
+      "plate": "E 4358 XY",
+      "jn": "Jan 2026",
+      "x": {
+        "email": "fajar.r.@mail.id",
+        "login": "OTP",
+        "gps": "-6.728, 108.438",
+        "pay": "Digital (QRIS/transfer/dompet)"
+      }
+    }
+  ],
+  "PR": {
+    "M1": [
+      {
+        "id": "P1",
+        "n": "Nasi Jamblang Komplit",
+        "k": "Makanan",
+        "h": 18000,
+        "st": 40,
+        "on": 1,
+        "kd": "M1-001",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "id": "P2",
+        "n": "Empal Gentong",
+        "k": "Makanan",
+        "h": 25000,
+        "st": 25,
+        "on": 1,
+        "kd": "M1-002",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "id": "P3",
+        "n": "Tahu Gejrot",
+        "k": "Camilan",
+        "h": 8000,
+        "st": 30,
+        "on": 1,
+        "kd": "M1-003",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "id": "P4",
+        "n": "Es Teh Manis",
+        "k": "Minuman",
+        "h": 4000,
+        "st": 80,
+        "on": 1,
+        "kd": "M1-004",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      }
+    ],
+    "M2": [
+      {
+        "id": "P5",
+        "n": "Brownies Kukus",
+        "k": "Kue",
+        "h": 35000,
+        "st": 20,
+        "on": 1,
+        "kd": "M2-001",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "id": "P6",
+        "n": "Kue Lapis Legit",
+        "k": "Kue",
+        "h": 60000,
+        "st": 8,
+        "on": 1,
+        "kd": "M2-002",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "id": "P7",
+        "n": "Nastar (toples)",
+        "k": "Kue kering",
+        "h": 45000,
+        "st": 15,
+        "on": 1,
+        "kd": "M2-003",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      }
+    ],
+    "M3": [
+      {
+        "id": "P8",
+        "n": "Bakso Urat",
+        "k": "Makanan",
+        "h": 20000,
+        "st": 35,
+        "on": 1,
+        "kd": "M3-001",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "id": "P9",
+        "n": "Mie Ayam Bakso",
+        "k": "Makanan",
+        "h": 18000,
+        "st": 30,
+        "on": 1,
+        "kd": "M3-002",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "id": "P10",
+        "n": "Es Jeruk",
+        "k": "Minuman",
+        "h": 5000,
+        "st": 60,
+        "on": 1,
+        "kd": "M3-003",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      }
+    ],
+    "M4": [
+      {
+        "id": "P11",
+        "n": "Kopi Susu Gula Aren",
+        "k": "Minuman",
+        "h": 16000,
+        "st": 50,
+        "on": 1,
+        "kd": "M4-001",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "id": "P12",
+        "n": "Es Kopi Hitam",
+        "k": "Minuman",
+        "h": 12000,
+        "st": 40,
+        "on": 1,
+        "kd": "M4-002",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "id": "P13",
+        "n": "Roti Bakar Cokelat",
+        "k": "Camilan",
+        "h": 14000,
+        "st": 25,
+        "on": 1,
+        "kd": "M4-003",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      }
+    ],
+    "M5": [
+      {
+        "id": "P14",
+        "n": "Ayam Geprek Level 1",
+        "k": "Makanan",
+        "h": 17000,
+        "st": 45,
+        "on": 1,
+        "kd": "M5-001",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "id": "P15",
+        "n": "Ayam Geprek Level 3",
+        "k": "Makanan",
+        "h": 18000,
+        "st": 45,
+        "on": 1,
+        "kd": "M5-002",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "id": "P16",
+        "n": "Nasi Putih",
+        "k": "Makanan",
+        "h": 4000,
+        "st": 99,
+        "on": 1,
+        "kd": "M5-003",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      }
+    ],
+    "M6": [
+      {
+        "id": "P17",
+        "n": "Paracetamol (strip)",
+        "k": "Obat bebas",
+        "h": 6000,
+        "st": 70,
+        "on": 1,
+        "kd": "M6-001",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "id": "P18",
+        "n": "Vitamin C 500 mg",
+        "k": "Suplemen",
+        "h": 22000,
+        "st": 40,
+        "on": 1,
+        "kd": "M6-002",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      },
+      {
+        "id": "P19",
+        "n": "Masker Medis (kotak)",
+        "k": "Alat kesehatan",
+        "h": 25000,
+        "st": 9,
+        "on": 1,
+        "kd": "M6-003",
+        "d": "Menu terlaris di Arjawinangun Delivery.",
+        "img": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80"
+      }
+    ]
+  },
+  "V": [
+    {
+      "t": "merchant",
+      "v": "2.4.1",
+      "min": "2.3.0",
+      "ad": 86,
+      "fu": 0,
+      "mt": 0,
+      "ft": {
+        "Promosi": 1,
+        "Chat": 1,
+        "Stok otomatis": 1
+      },
+      "an": ""
+    },
+    {
+      "t": "driver",
+      "v": "3.1.0",
+      "min": "3.0.0",
+      "ad": 74,
+      "fu": 0,
+      "mt": 0,
+      "ft": {
+        "Navigasi": 1,
+        "Bukti foto": 1,
+        "Mode malam": 0
+      },
+      "an": ""
+    },
+    {
+      "t": "customer",
+      "v": "5.0.2",
+      "min": "4.9.0",
+      "ad": 91,
+      "fu": 0,
+      "mt": 0,
+      "ft": {
+        "Bayar QRIS": 1,
+        "Ulasan": 1,
+        "Lacak langsung": 1
+      },
+      "an": ""
+    }
+  ],
+  "O": [
+    {
+      "id": "ORD-2401",
+      "c": "Siti Aminah",
+      "m": "Warung Bu Iis",
+      "d": "Asep Ruhiyat",
+      "s": "Diantar",
+      "p": 48500
+    },
+    {
+      "id": "ORD-2402",
+      "c": "Budi Hartono",
+      "m": "Toko Kue Sari Rasa",
+      "d": "",
+      "s": "Baru",
+      "p": 92000
+    },
+    {
+      "id": "ORD-2403",
+      "c": "Lilis Suryani",
+      "m": "Kopi Sawah",
+      "d": "Nandang S.",
+      "s": "Diproses",
+      "p": 36000
+    },
+    {
+      "id": "ORD-2404",
+      "c": "Nur Hidayah",
+      "m": "Ayam Geprek Mantap",
+      "d": "Yayan Mulyana",
+      "s": "Selesai",
+      "p": 54000
+    },
+    {
+      "id": "ORD-2405",
+      "c": "Agus Salim",
+      "m": "Bakso Pak Darto",
+      "d": "",
+      "s": "Dibatalkan",
+      "p": 27000
+    }
+  ],
+  "CMS": [
+    {
+      "n": "Promo Gratis Ongkir Jumat",
+      "on": 1,
+      "jn": "Diskon ongkir",
+      "ds": "Gratis ongkir untuk pesanan di atas Rp 30.000 setiap hari Jumat.",
+      "img": "",
+      "pos": "Tengah",
+      "link": "",
+      "st": "",
+      "en": ""
+    },
+    {
+      "n": "Festival Kuliner Arjawinangun",
+      "on": 1,
+      "jn": "Festival kuliner",
+      "ds": "Jelajahi jajanan khas Arjawinangun bersama toko pilihan.",
+      "img": "",
+      "pos": "Tengah",
+      "link": "",
+      "st": "",
+      "en": ""
+    },
+    {
+      "n": "Ajak Teman, Dapat Voucher",
+      "on": 0,
+      "jn": "Voucher",
+      "ds": "Bagikan kode referral dan dapatkan voucher untuk Anda dan teman.",
+      "img": "",
+      "pos": "Tengah",
+      "link": "",
+      "st": "",
+      "en": ""
+    }
+  ],
+  "BN": {
+    "w": 1080,
+    "h": 540
+  },
+  "NT": [
+    {
+      "to": "Semua pengguna",
+      "ti": "Pemeliharaan Server Rutin",
+      "tm": "Hari ini"
+    },
+    {
+      "to": "Toko",
+      "ti": "Fitur variasi menu baru aktif",
+      "tm": "Hari ini"
+    },
+    {
+      "to": "Driver",
+      "ti": "Insentif jam sibuk aktif",
+      "tm": "Kemarin"
+    }
+  ],
+  "SET": {
+    "kom": "12",
+    "jam": "07.00 – 22.00",
+    "reg_m": 1,
+    "reg_d": 1,
+    "ver_d": 1,
+    "mt": 0
+  },
+  "INB": [
+    {
+      "id": "M1",
+      "role": "customer",
+      "from": "Siti Aminah",
+      "subj": "Pesanan terlambat (#C-118)",
+      "tm": "08.12",
+      "un": 1,
+      "msgs": [
+        {
+          "me": 0,
+          "tx": "Pesanan saya ORD-2401 sudah 40 menit belum sampai. Mohon dicek ya.",
+          "tm": "08.12"
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "role": "merchant",
+      "from": "Warung Bu Iis",
+      "subj": "Stok Nasi Jamblang habis",
+      "tm": "07.55",
+      "un": 1,
+      "msgs": [
+        {
+          "me": 0,
+          "tx": "Stok Nasi Jamblang Komplit habis. Bagaimana cara menyembunyikan produk dari aplikasi pelanggan?",
+          "tm": "07.55"
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "role": "driver",
+      "from": "Asep Ruhiyat",
+      "subj": "Pelanggan tidak bisa dihubungi",
+      "tm": "07.40",
+      "un": 1,
+      "msgs": [
+        {
+          "me": 0,
+          "tx": "Pelanggan ORD-2403 tidak mengangkat telepon dan tidak ada di lokasi. Mohon arahan.",
+          "tm": "07.40"
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "role": "customer",
+      "from": "Budi Hartono",
+      "subj": "Cara memakai voucher",
+      "tm": "Kemarin",
+      "un": 0,
+      "msgs": [
+        {
+          "me": 0,
+          "tx": "Voucher gratis ongkir kok tidak bisa dipakai?",
+          "tm": "16.20"
+        },
+        {
+          "me": 1,
+          "tx": "Voucher berlaku untuk pesanan di atas Rp 30.000. Silakan coba lagi ya.",
+          "tm": "16.45"
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "role": "merchant",
+      "from": "Kopi Sawah",
+      "subj": "Pencairan dana belum masuk",
+      "tm": "Kemarin",
+      "un": 0,
+      "msgs": [
+        {
+          "me": 0,
+          "tx": "Dana pesanan minggu lalu belum masuk rekening.",
+          "tm": "10.02"
+        }
+      ]
+    }
+  ],
+  "JN": [
+    "Promo",
+    "Festival kuliner",
+    "Diskon ongkir",
+    "Voucher",
+    "Pengumuman",
+    "Event",
+    "Lainnya"
+  ],
+  "AU": [
+    {
+      "t": "09:12",
+      "u": "Admin Utama",
+      "m": "Backend AWD disinkronkan dengan https://suderyderry.github.io/awd-admin/"
+    },
+    {
+      "t": "08:45",
+      "u": "Sistem AWD",
+      "m": "Sinkronisasi database Arjawinangun Delivery selesai"
+    }
+  ]
+}
